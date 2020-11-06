@@ -22,7 +22,7 @@
 
     <h2>Sign-in</h2>
     <form action="" method="POST">
-        <input type="Email" name="email" placeholder="Your Email"><br>
+        <input type="email" name="email" placeholder="Your Email"><br>
         <input type="text" name="password" placeholder="Your password"><br>
         <input type="submit" name="submitBtn" value="signin">
     </form>
@@ -36,15 +36,19 @@
     $db_name = 'project9';
     $db_found = mysqli_select_db($conn, $db_name);
 
+    $email = '';
+    $password = '';
+
+
     if ($db_found) {
         //Make sure i clicked the button
         if (isset($_POST['submitBtn'])) {
             //Get info from the form(and remove white spaces)
-            $mail = trim($_POST['email']);
+            $email = trim($_POST['email']);
             $password = trim($_POST['password']);
 
-            //execute QUERY 
-            $sql_query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' ";
+            //define QUERY 
+            $sql_query = "SELECT firstname FROM users WHERE email = '$email' AND password = '$password' ";
 
             //execute the query
             $currentUser = mysqli_query($conn, $sql_query);
@@ -52,17 +56,44 @@
             // fetch results as associative array
             $_SESSION['users'] = mysqli_fetch_assoc($currentUser);
 
+            if ($_SESSION['users'] != NULL) {
+                echo 'welcome ' . $email;
 
-            $message = 'you are not allow on the website';
+                // var_dump($_SESSION['users']);
+            } else {
+                echo 'user ou password nest pas bon ';
+            }
 
-            //echo $mail . '/' . $password . '<br>';
+
+
+
+
+
+
+            // Make sure the email is on database
+            $query = "SELECT * FROM users WHERE email = '$email'";
+
+            // Make sure the password is on database
+            $query = "SELECT * FROM users WHERE password = '$password'";
+
+
+            //execute the query
+            $currentUser = mysqli_query($conn, $sql_query);
+
+            // fetch results as associative array
+            $_SESSION['users'] = mysqli_fetch_assoc($currentUser);
+
+            // message
+            $goodmessage = 'You are online';
+            $badmessage = 'wrong email or password';
+
+            //echo $email . '/' . $password . '<br>';
 
             // Check if there is a match
             if ($email == trim($email) && $password == trim($password)) {
-                $message = 'You are online';
-                echo $message;
+                echo $goodmessage;
             } else {
-                echo 'Something went wrong try again.';
+                echo $badmessage;
             }
         }
     }
