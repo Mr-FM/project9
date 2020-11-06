@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2020 at 02:00 PM
+-- Generation Time: Nov 06, 2020 at 03:15 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -135,15 +135,15 @@ ALTER TABLE `actors`
 -- Indexes for table `actorsandmovies`
 --
 ALTER TABLE `actorsandmovies`
-  ADD KEY `movies.id` (`movies.id`),
-  ADD KEY `actors.id` (`actors.id`);
+  ADD KEY `c1` (`actors.id`),
+  ADD KEY `c2` (`movies.id`);
 
 --
 -- Indexes for table `categoriesandmovies`
 --
 ALTER TABLE `categoriesandmovies`
-  ADD KEY `moviesid` (`moviesid`),
-  ADD KEY `categoryid` (`categoryid`);
+  ADD KEY `c3` (`categoryid`),
+  ADD KEY `c4` (`moviesid`);
 
 --
 -- Indexes for table `category`
@@ -156,27 +156,61 @@ ALTER TABLE `category`
 --
 ALTER TABLE `movies`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `categoryid` (`categoryid`);
+  ADD KEY `c8` (`categoryid`);
 
 --
 -- Indexes for table `moviesandplaylists`
 --
 ALTER TABLE `moviesandplaylists`
-  ADD KEY `playlistsid` (`playlistsid`,`moviesid`),
-  ADD KEY `moviesid` (`moviesid`);
+  ADD KEY `c5` (`moviesid`),
+  ADD KEY `c6` (`playlistsid`);
 
 --
 -- Indexes for table `playlists`
 --
 ALTER TABLE `playlists`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD KEY `c7` (`userid`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `actors`
+--
+ALTER TABLE `actors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movies`
+--
+ALTER TABLE `movies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `playlists`
+--
+ALTER TABLE `playlists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -186,34 +220,34 @@ ALTER TABLE `users`
 -- Constraints for table `actorsandmovies`
 --
 ALTER TABLE `actorsandmovies`
-  ADD CONSTRAINT `actorsandmovies_ibfk_1` FOREIGN KEY (`movies.id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actorsandmovies_ibfk_2` FOREIGN KEY (`actors.id`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `c1` FOREIGN KEY (`actors.id`) REFERENCES `actors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `c2` FOREIGN KEY (`movies.id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `categoriesandmovies`
 --
 ALTER TABLE `categoriesandmovies`
-  ADD CONSTRAINT `categoriesandmovies_ibfk_1` FOREIGN KEY (`categoryid`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `categoriesandmovies_ibfk_2` FOREIGN KEY (`moviesid`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `c3` FOREIGN KEY (`categoryid`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `c4` FOREIGN KEY (`moviesid`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `movies`
 --
 ALTER TABLE `movies`
-  ADD CONSTRAINT `movies_ibfk_1` FOREIGN KEY (`categoryid`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `c8` FOREIGN KEY (`categoryid`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `moviesandplaylists`
 --
 ALTER TABLE `moviesandplaylists`
-  ADD CONSTRAINT `moviesandplaylists_ibfk_1` FOREIGN KEY (`moviesid`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `c5` FOREIGN KEY (`moviesid`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `c6` FOREIGN KEY (`playlistsid`) REFERENCES `playlists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `playlists`
 --
 ALTER TABLE `playlists`
-  ADD CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `playlists_ibfk_2` FOREIGN KEY (`id`) REFERENCES `moviesandplaylists` (`playlistsid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `c7` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
