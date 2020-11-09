@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 11:32 AM
+-- Generation Time: Nov 09, 2020 at 01:34 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -110,6 +110,47 @@ CREATE TABLE `categoriesandmovies` (
   `categoryid` int(11) NOT NULL,
   `moviesid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categoriesandmovies`
+--
+
+INSERT INTO `categoriesandmovies` (`categoryid`, `moviesid`) VALUES
+(10, 5),
+(7, 12),
+(10, 12),
+(4, 12),
+(2, 16),
+(1, 16),
+(10, 8),
+(1, 3),
+(10, 10),
+(8, 10),
+(7, 14),
+(2, 14),
+(6, 14),
+(7, 18),
+(1, 18),
+(2, 18),
+(2, 2),
+(7, 2),
+(8, 2),
+(3, 17),
+(2, 17),
+(10, 7),
+(7, 7),
+(2, 9),
+(7, 9),
+(2, 13),
+(3, 13),
+(10, 15),
+(7, 15),
+(2, 1),
+(7, 1),
+(7, 11),
+(10, 11),
+(3, 4),
+(5, 6);
 
 -- --------------------------------------------------------
 
