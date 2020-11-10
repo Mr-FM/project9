@@ -1,0 +1,29 @@
+*
+{
+ box-sizing: border-box;
+}
+
+
+#movieZone
+{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-wrap: wrap;
+}
+
+.movieCard
+{
+  text-align: center;  
+ 
+}
+
+img
+{
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border: 4px solid black;
+}
+
+
+
