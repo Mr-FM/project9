@@ -11,14 +11,10 @@
     <title>Search</title>
 </head>
 <header>
-    <div>
-        <nav>
-            <ul>
-                <li><a href="./home.php">Accueil</a></li>
-                <li><a href="./categories.php">Catégories</a></li>
-                <li><a href="./search.php">Search</a></li>
-            </ul>
-        </nav>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#addmovie">Addmovie</a>
     </div>
     <div>
         <nav id="top-navigation">
